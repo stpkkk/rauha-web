@@ -1,7 +1,7 @@
-<<<<<<< HEAD
-export default function Page() {
-=======
+export const metadata = {
+	title: 'Домики',
+}
+
 export default function CabinsPage() {
->>>>>>> 2e5f4a8 (rauha-project-organization)
-	return <div>Cabins</div>
+	return <h1 className='text-center'>Account</h1>
 }
