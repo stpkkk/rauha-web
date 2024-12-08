@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'comfortaa';
+  src: url('../../public/fonts/comfortaa-Regular.ttf');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'comfortaa';
+  src: url('../../public/fonts/comfortaa-SemiBold.ttf');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'comfortaa';
+  src: url('../../public/fonts/comfortaa-Bold.ttf');
+  font-weight: 700;
+  font-display: swap;
+}
+
 /* @layer components {
   .spinner {
     margin: 3.2rem auto 1.6rem;

@@ -36,6 +36,9 @@ const config: Config = {
 					950: '#382814',
 				},
 			},
+			fontFamily: {
+				comfortaa: ['comfortaa', 'sans-serif'],
+			},
 		},
 	},
 	plugins: [],
