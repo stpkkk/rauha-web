@@ -16,16 +16,13 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang='en'>
-			<body
-				className='font-comfortaa bg-primary-950 text-primary-100 min-h-screen flex flex-col antialiased
-			'
-			>
-				<Header/>
-				<div className='flex-1 px-8 py-12'>
-					<main className='max-w-7xl mx-auto'>{children}</main>
-				</div>
-			</body>
-		</html>
-	)
+    <html lang="en">
+      <body className="relative flex min-h-screen flex-col bg-primary-950 font-comfortaa text-primary-100 antialiased">
+        <Header />
+        <div className="flex-1 px-8 py-12">
+          <main className="mx-auto max-w-7xl">{children}</main>
+        </div>
+      </body>
+    </html>
+  );
 }
