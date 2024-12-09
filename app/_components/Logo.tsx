@@ -10,6 +10,7 @@ function Logo() {
 				width='60'
 				alt='Rauha logo'
 				priority
+				className='rounded-full'
 			/>
 			<span className='text-xl font-semibold text-primary-100'>Rauha</span>
 		</Link>

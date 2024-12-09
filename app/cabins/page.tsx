@@ -3,5 +3,5 @@ export const metadata = {
 }
 
 export default function CabinsPage() {
-	return <h1 className='text-center'>Account</h1>
+	return <h1 >Cabins</h1>
 }

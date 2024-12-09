@@ -1,5 +1,4 @@
-import Logo from './_components/Logo'
-import Navigation from './_components/Navigation'
+import Header from './_components/Header'
 import './_styles/globals.css'
 
 export const metadata = {
@@ -19,15 +18,13 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className='font-comfortaa bg-primary-950 text-primary-100  min-h-screen
+				className='font-comfortaa bg-primary-950 text-primary-100 min-h-screen flex flex-col antialiased
 			'
 			>
-				<header>
-					<Logo />
-				</header>
-				<Navigation />
-
-				<main>{children}</main>
+				<Header/>
+				<div className='flex-1 px-8 py-12'>
+					<main className='max-w-7xl mx-auto'>{children}</main>
+				</div>
 			</body>
 		</html>
 	)
