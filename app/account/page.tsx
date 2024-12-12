@@ -3,5 +3,9 @@ export const metadata = {
 }
 
 export default function AccountPage() {
-	return <div>Account</div>
+	return (
+    <h2 className="mb-4 text-2xl font-semibold text-accent-400">
+      Добро пожаловать $$$$name$$$$
+    </h2>
+  );
 }
