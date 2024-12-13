@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Обновить Профиль",
+};
+
 function ProfilePage() {
   const countryFlag = "pt.jpg";
 

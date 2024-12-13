@@ -2,6 +2,10 @@ import ReservationCard from "@/app/_components/ReservationCard";
 import { BookingType } from "@/app/_types/booking";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Бронирования",
+};
+
 function ReservationsPage() {
   const bookings: BookingType[] = [];
 
