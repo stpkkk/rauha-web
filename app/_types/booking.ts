@@ -2,7 +2,7 @@ import { CabinType } from "./cabin";
 
 export type BookingType =
   | {
-      id?: number;
+      id: number;
       guestId: number;
       startDate: Date | string;
       endDate: Date | string;
