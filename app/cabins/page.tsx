@@ -22,7 +22,6 @@ export default function CabinsPage() {
       </p>
 
       <Suspense fallback={<Spinner />}>
-        {/* async component: */}
         <CabinList />
       </Suspense>
     </div>
