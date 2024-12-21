@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getCabin } from "@/app/_lib/data-service";
+import { getCabin, getCabins } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 
 type CabinPageProps = {
@@ -10,12 +10,21 @@ type CabinPageProps = {
 //   title: "Домик",
 // };
 
-export async function generateMetadata({params}: CabinPageProps) {
-  const {name} = await getCabin(params.cabinId);
+export async function generateMetadata({ params }: CabinPageProps) {
+  const { name } = await getCabin(params.cabinId);
 
   return {
-    title: `Домик ${name}`
-  }
+    title: `Домик ${name}`,
+  };
+}
+
+export async function generateStaticParams() {
+  const cabins = await getCabins();
+
+  const ids = cabins.map((cabin) => ({ cabinId: String(cabin.id) }));
+
+  //need to return an array and each value must be an object  [{ cabinId: '162' }, { cabinId: '163' }]
+  return ids;
 }
 
 export default async function CabinPage({ params }: CabinPageProps) {
