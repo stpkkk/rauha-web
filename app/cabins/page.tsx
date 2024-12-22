@@ -2,6 +2,9 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
 
+export const revalidate = 3600;// refetch data every 60 min
+// export const revalidate = 15;// refetch data every 15 sec
+
 export const metadata = {
   title: "Домики",
 };

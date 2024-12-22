@@ -24,8 +24,8 @@ function ReservationsPage() {
         </p>
       ) : (
         <ul className="space-y-6">
-          {bookings.map((booking) => (
-            <ReservationCard booking={booking} key={booking.id} />
+          {bookings.map((booking, i) => (
+            <ReservationCard booking={booking} key={i} />
           ))}
         </ul>
       )}

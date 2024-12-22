@@ -1,11 +1,12 @@
-import { revalidatePath } from "next/cache";
+// import { unstable_noStore as noStore } from "next/cache";
+
 import { getCabins } from "../_lib/data-service";
 import { CabinType } from "../_types/cabin";
 import CabinCard from "./CabinCard";
 
 async function CabinList() {
+  // noStore();
   const cabins: CabinType[] = await getCabins();
-  revalidatePath("/cabins");
 
   if (!cabins.length) return null;
 
