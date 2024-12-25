@@ -11,16 +11,15 @@ type CabinListProps = {
 async function CabinList({ filter }: CabinListProps) {
   // noStore(); - to unsubscribe from cashing data (instead export const revalidate = 3600 in cabins-page)
   const cabins: CabinType[] = await getCabins();
-  let displayedCabins;
-  if (filter === "all") displayedCabins = cabins;
-  if (filter === "small")
-    displayedCabins = cabins.filter((cabin) => cabin.maxCapacity <= 3);
-  if (filter === "medium")
-    displayedCabins = cabins.filter(
-      (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7,
-    );
-  if (filter === "large")
-    displayedCabins = cabins.filter((cabin) => cabin.maxCapacity >= 8);
+  const displayedCabins =
+    {
+      all: cabins,
+      small: cabins.filter((cabin) => cabin.maxCapacity <= 3),
+      medium: cabins.filter(
+        (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7,
+      ),
+      large: cabins.filter((cabin) => cabin.maxCapacity >= 8),
+    }[filter] || cabins;
 
   if (!cabins.length) return null;
 

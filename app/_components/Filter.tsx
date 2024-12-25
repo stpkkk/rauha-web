@@ -37,21 +37,21 @@ function Filter() {
         handleFilter={handleFilter}
         activeFilter={activeFilter}
       >
-        1&mdash;3 гостей
+        1 - 3 гостей
       </Button>
       <Button
         filter="medium"
         handleFilter={handleFilter}
         activeFilter={activeFilter}
       >
-        4&mdash;7
+        4 - 7 гостей
       </Button>
       <Button
         filter="large"
         handleFilter={handleFilter}
         activeFilter={activeFilter}
       >
-        8&mdash;12
+        8 - 12 гостей
       </Button>
     </div>
   );
