@@ -1,15 +1,24 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import Filter from "../_components/Filter";
 
-export const revalidate = 3600;// refetch data every 60 min
+type CabinsPageProps = {
+  searchParams: {
+    capacity: string;
+  };
+};
+
+export const revalidate = 3600; // refetch data every 60 min
 // export const revalidate = 15;// refetch data every 15 sec
 
 export const metadata = {
   title: "Домики",
 };
 
-export default function CabinsPage() {
+export default function CabinsPage({ searchParams }: CabinsPageProps) {
+  const filter = searchParams?.capacity ?? "all";
+
   return (
     <div>
       <h1 className="mb-5 text-4xl font-medium text-accent-400">
@@ -23,9 +32,13 @@ export default function CabinsPage() {
         вдали от города. Идеальное место для тихого, спокойного отдыха. Добро
         пожаловать!
       </p>
+      <div className="mb-8 flex justify-end">
+        <Filter />
+      </div>
 
-      <Suspense fallback={<Spinner />}>
-        <CabinList />
+      {/* key={filter} - unique key (than filter value changes then spinner shown again)*/}
+      <Suspense fallback={<Spinner />} key={filter}>
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
