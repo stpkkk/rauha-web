@@ -32,10 +32,10 @@ export default function CabinsPage({ searchParams }: CabinsPageProps) {
         вдали от города. Идеальное место для тихого, спокойного отдыха. Добро
         пожаловать!
       </p>
+
       <div className="mb-8 flex justify-end">
         <Filter />
       </div>
-
       {/* key={filter} - unique key (than filter value changes then spinner shown again)*/}
       <Suspense fallback={<Spinner />} key={filter}>
         <CabinList filter={filter} />

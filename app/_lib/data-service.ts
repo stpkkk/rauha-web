@@ -40,7 +40,7 @@ export async function getCabinPrice(id: number) {
 export const getCabins = async function () {
   const { data, error } = await supabase
     .from("cabins")
-    .select("id, name, maxCapacity, regularPrice, discount, image")
+    .select("id, name, maxCapacity, regularPrice, discount, image, description")
     .order("name");
 
   // For testing
@@ -99,7 +99,7 @@ export async function getBookings(guestId: number) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId: number) {
+export async function getBookedDatesByCabinId(cabinId: string) {
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0);
 
