@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { UsersIcon, MapPinIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { CabinType } from "../_types/cabin";
+import TextExpander from "./TextExpander";
 
 type CabinProps = {
   cabin: CabinType;
@@ -27,7 +28,9 @@ export default function Cabin({ cabin }: CabinProps) {
           Домик {name}
         </h3>
 
-        <p className="mb-10 text-lg text-primary-300">{description}</p>
+        <p className="mb-10 text-lg text-primary-300">
+          <TextExpander>{description}</TextExpander>
+        </p>
 
         <ul className="mb-7 flex flex-col gap-4">
           <li className="flex items-center gap-3">
