@@ -68,6 +68,26 @@ function DateSelector({
         captionLayout="dropdown"
         numberOfMonths={2}
       />
+      {/*
+       react-day-picker v9+:
+      <DayPicker
+        className="place-self-center pt-12"
+        mode="range"
+        min={minBookingLength + 1}
+        max={maxBookingLength}
+        onSelect={handleSelect} // Write the state if selected a date
+        selected={range} // Read the state
+        // // OLD API
+        // fromMonth={new Date()}
+        // fromDate={new Date()}
+        // toYear={new Date().getFullYear() + 5}
+        // BASED ON NEW API
+        startMonth={new Date()}
+        startDate={new Date()}
+        endMonth={new Date(new Date().getFullYear() + 5, 11)} // December of the year 5 years from now
+        captionLayout="dropdown"
+        numberOfMonths={2} // Show only 2 months
+      /> */}
 
       <div className="flex h-[72px] items-center justify-between bg-accent-500 px-8 text-primary-800">
         <div className="flex items-baseline gap-6">
