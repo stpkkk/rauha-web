@@ -6,6 +6,8 @@ import "react-day-picker/dist/style.css";
 import { CabinType } from "../_types/cabin";
 import { SettingType } from "../_types/setting";
 import { useReservation } from "./ReservationContext";
+import { Locale, ru } from "date-fns/locale";
+import { Day, Month } from "date-fns";
 
 // function isAlreadyBooked(range: DateRange | undefined, datesArr: Date[]) {
 //   return (
@@ -49,9 +51,20 @@ function DateSelector({
   const cabinPrice = numNights * (regularPrice - discount);
 
   // SETTINGS
-  const {minBookingLength, maxBookingLength} = settings;
+  const { minBookingLength, maxBookingLength } = settings;
 
+  // Custom formatters for Russian localization
+  const formatCaption = (month: Date) => {
+    return (
+      ru.localize?.month(month.getMonth() as Month, { width: "wide" }) +
+      " " +
+      month.getFullYear()
+    );
+  };
 
+  const formatWeekdayName = (weekday: Date) => {
+    return ru.localize?.day(weekday.getDay() as Day, { width: "short" });
+  };
 
   return (
     <div className="flex flex-col justify-between">
@@ -67,6 +80,8 @@ function DateSelector({
         toYear={new Date().getFullYear() + 5}
         captionLayout="dropdown"
         numberOfMonths={2}
+        locale={ru}
+        formatters={{ formatCaption, formatWeekdayName }}
       />
       {/*
        react-day-picker v9+:
@@ -94,15 +109,15 @@ function DateSelector({
           <p className="flex items-baseline gap-2">
             {discount > 0 ? (
               <>
-                <span className="text-2xl">${regularPrice - discount}</span>
+                <span className="text-2xl">{regularPrice - discount}руб.</span>
                 <span className="font-semibold text-primary-700 line-through">
-                  ${regularPrice}
+                  {regularPrice}руб.
                 </span>
               </>
             ) : (
-              <span className="text-2xl">${regularPrice}</span>
+              <span className="text-2xl">{regularPrice}руб.</span>
             )}
-            <span className="">/night</span>
+            <span className="">/ночь</span>
           </p>
           {numNights > 0 ? (
             <>
@@ -122,7 +137,7 @@ function DateSelector({
             className="border border-primary-800 px-4 py-2 text-sm font-semibold"
             onClick={resetRange}
           >
-            Clear
+            Сбросить
           </button>
         ) : null}
       </div>

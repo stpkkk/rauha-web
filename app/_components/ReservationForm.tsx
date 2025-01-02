@@ -14,7 +14,7 @@ function ReservationForm({ cabin }: ReservationFormType) {
   return (
     <div className="scale-[1.01]">
       <div className="flex items-center justify-between bg-primary-800 px-16 py-2 text-primary-300">
-        <p>Logged in as</p>
+        <p>Пользователь</p>
 
         {/* <div className='flex gap-4 items-center'>
           <img
@@ -34,7 +34,7 @@ function ReservationForm({ cabin }: ReservationFormType) {
 
       <form className="flex flex-col gap-5 bg-primary-900 px-16 py-10 text-lg">
         <div className="space-y-2">
-          <label htmlFor="numGuests">How many guests?</label>
+          <label htmlFor="numGuests">Сколько будет гостей?</label>
           <select
             name="numGuests"
             id="numGuests"
@@ -42,11 +42,11 @@ function ReservationForm({ cabin }: ReservationFormType) {
             required
           >
             <option value="" key="">
-              Select number of guests...
+              Количество гостей...
             </option>
             {Array.from({ length: maxCapacity }, (_, i) => i + 1).map((x) => (
               <option value={x} key={x}>
-                {x} {x === 1 ? "guest" : "guests"}
+                {x} {x === 1 ? "гость" : "гостей"}
               </option>
             ))}
           </select>
@@ -54,21 +54,21 @@ function ReservationForm({ cabin }: ReservationFormType) {
 
         <div className="space-y-2">
           <label htmlFor="observations">
-            Anything we should know about your stay?
+            Что-нибудь, что мы должны знать о вашем пребывании?
           </label>
           <textarea
             name="observations"
             id="observations"
             className="w-full rounded-sm bg-primary-200 px-5 py-3 text-primary-800 shadow-sm"
-            placeholder="Any pets, allergies, special requirements, etc.?"
+            placeholder="Есть ли домашние животные, аллергия, особые требования и т. д.?"
           />
         </div>
 
         <div className="flex items-center justify-end gap-6">
-          <p className="text-base text-primary-300">Start by selecting dates</p>
+          <p className="text-base text-primary-300">Начните с выбора дат</p>
 
           <button className="bg-accent-500 px-8 py-4 font-semibold text-primary-800 transition-all hover:bg-accent-600 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-            Reserve now
+            Забронировать
           </button>
         </div>
       </form>

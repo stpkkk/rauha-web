@@ -1,6 +1,5 @@
 import Cabin from "@/app/_components/Cabin";
 import Reservations from "@/app/_components/Reservation";
-import ReservationReminder from "@/app/_components/ReservationReminder";
 import Spinner from "@/app/_components/Spinner";
 import { getCabin, getCabins } from "@/app/_lib/data-service";
 import { Suspense } from "react";
@@ -32,8 +31,8 @@ export async function generateStaticParams() {
 
 export default async function CabinPage({ params }: CabinPageProps) {
   const cabin = await getCabin(params.cabinId);
-
   const { name } = cabin;
+  const isCurrentPage = params.cabinId !== cabin.id;
 
   return (
     <div className="mx-auto mt-8 max-w-6xl">
@@ -45,7 +44,6 @@ export default async function CabinPage({ params }: CabinPageProps) {
 
         <Suspense fallback={<Spinner />}>
           <Reservations cabin={cabin} />
-          <ReservationReminder />
         </Suspense>
       </div>
     </div>
