@@ -1,26 +1,28 @@
-import Link from 'next/link'
+import Link from "next/link";
+import User from "./User";
 
 export default function Navigation() {
   return (
     <nav className="z-10 text-xl">
-      <ul className="flex gap-16 items-center">
+      <ul className="flex items-center gap-16">
         <li>
-          <Link href="/cabins" className="hover:text-accent-400 transition-colors">
+          <Link
+            href="/cabins"
+            className="transition-colors hover:text-accent-400"
+          >
             Домики
           </Link>
         </li>
         <li>
-          <Link href="/about" className="hover:text-accent-400 transition-colors">
+          <Link
+            href="/about"
+            className="transition-colors hover:text-accent-400"
+          >
             О нас
           </Link>
         </li>
         <li>
-          <Link
-            href="/account"
-            className="hover:text-accent-400 transition-colors"
-          >
-            Для Гостей
-          </Link>
+          <User />
         </li>
       </ul>
     </nav>

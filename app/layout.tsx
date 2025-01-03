@@ -1,4 +1,6 @@
-import Header from './_components/Header'
+import { SessionProvider } from "next-auth/react";
+import { AuthProvider } from "./_components/AuthContext";
+import Header from "./_components/Header";
 import { ReservationProvider } from "./_components/ReservationContext";
 import "./_styles/globals.css";
 
@@ -17,15 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="relative flex min-h-screen flex-col bg-primary-950 font-comfortaa text-primary-100 antialiased">
-        <Header />
-        <div className="grid flex-1 px-8 py-12">
-          <main className="mx-auto w-full max-w-7xl">
-            <ReservationProvider>{children}</ReservationProvider>
-          </main>
-        </div>
-      </body>
-    </html>
+    <SessionProvider>
+      <AuthProvider>
+        <html lang="en">
+          <body className="relative flex min-h-screen flex-col bg-primary-950 font-comfortaa text-primary-100 antialiased">
+            <Header />
+            <div className="grid flex-1 px-8 py-12">
+              <main className="mx-auto w-full max-w-7xl">
+                <ReservationProvider>{children}</ReservationProvider>
+              </main>
+            </div>
+          </body>
+        </html>
+      </AuthProvider>
+    </SessionProvider>
   );
 }

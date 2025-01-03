@@ -1,36 +1,35 @@
 "use client";
 
-import { CabinType } from "../_types/cabin";
+import { User } from "next-auth";
+import Image from "next/image";
 import { useReservation } from "./ReservationContext";
+import { CabinType } from "../_types/cabin";
 
 type ReservationFormType = {
   cabin: CabinType;
+  user: User;
 };
 
-function ReservationForm({ cabin }: ReservationFormType) {
+function ReservationForm({ cabin, user }: ReservationFormType) {
   const { range } = useReservation();
   const { maxCapacity } = cabin;
 
   return (
     <div className="scale-[1.01]">
       <div className="flex items-center justify-between bg-primary-800 px-16 py-2 text-primary-300">
-        <p>Пользователь</p>
-
-        {/* <div className='flex gap-4 items-center'>
-          <img
-            // Important to display google profile images
-            referrerPolicy='no-referrer'
-            className='h-8 rounded-full'
-            src={user.image}
-            alt={user.name}
+        <div className="relative h-8 w-8">
+          <Image
+            //referrerPolicy - Important to display google profile images
+            referrerPolicy="no-referrer"
+            className="rounded-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            src={user?.image || ""}
+            alt={user?.name || "avatar"}
           />
-          <p>{user.name}</p>
-        </div> */}
+        </div>
+        <p>{user.name}</p>
       </div>
-
-      <p>
-        {String(range?.from) || ""} до {String(range?.to) || ""}
-      </p>
 
       <form className="flex flex-col gap-5 bg-primary-900 px-16 py-10 text-lg">
         <div className="space-y-2">
