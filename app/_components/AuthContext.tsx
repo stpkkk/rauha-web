@@ -21,6 +21,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 function useAuth(): AuthContextType {
   const context = use(AuthContext);
+
   if (context === null) {
     throw new Error("useAuth must be used within a AuthProvider");
   }
