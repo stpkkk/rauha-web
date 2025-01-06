@@ -14,6 +14,10 @@ const authConfig = {
       return !!auth?.user;
     },
   },
+  pages: {
+    //to redirect in our own /login page, instead default google
+    signIn: "/login",
+  },
 };
 
 export const {
