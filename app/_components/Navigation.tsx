@@ -1,5 +1,5 @@
 import Link from "next/link";
-import User from "./User";
+import Guest from "./Guest";
 
 export default function Navigation() {
   return (
@@ -22,7 +22,7 @@ export default function Navigation() {
           </Link>
         </li>
         <li>
-          <User />
+          <Guest />
         </li>
       </ul>
     </nav>

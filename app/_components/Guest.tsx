@@ -1,11 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { auth } from "../_lib/auth";
 
-export default function User() {
-  const { data: session } = useSession();
+export default async function Guest() {
+  // const { data: session } = useSession();
+  const session = await auth();
 
   return (
     <Link
@@ -16,6 +15,7 @@ export default function User() {
         <div className="relative h-8 w-8">
           <Image
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="rounded-full"
             src={session.user.image}
             alt={session.user.name || ""}
@@ -29,4 +29,3 @@ export default function User() {
     </Link>
   );
 }
-

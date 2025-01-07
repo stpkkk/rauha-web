@@ -2,6 +2,7 @@ import { eachDayOfInterval } from "date-fns";
 import supabase from "./supabase";
 import { BookingType } from "../_types/booking";
 import { notFound } from "next/navigation";
+import { Guest } from "../_types/guest";
 
 // GET
 
@@ -55,7 +56,7 @@ export const getCabins = async function () {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: string) {
+export async function getGuest(email: string | null | undefined) {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -153,7 +154,7 @@ export async function getSettings() {
 
 // CREATE
 
-export async function createGuest(newGuest: any) {
+export async function createGuest(newGuest: Guest) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
