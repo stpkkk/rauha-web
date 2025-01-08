@@ -3,7 +3,6 @@ import Link from "next/link";
 import { auth } from "../_lib/auth";
 
 export default async function Guest() {
-  // const { data: session } = useSession();
   const session = await auth();
 
   return (

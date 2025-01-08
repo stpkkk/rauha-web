@@ -1,3 +1,4 @@
+//For fixing Session type error in auth.ts
 import NextAuth, { User } from "next-auth";
 
 declare module "next-auth" {

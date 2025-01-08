@@ -17,6 +17,7 @@ const authConfig = {
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
     }),
   ],
+
   callbacks: {
     //authorized() - For Protected route: redirect to '/login' from '/account' if user not authorized
     authorized({ auth, request }: { auth: Session | null; request: Request }) {
@@ -45,6 +46,7 @@ const authConfig = {
       return session;
     },
   },
+
   pages: {
     //to redirect in our custom /login page, instead default google
     signIn: "/login",

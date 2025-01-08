@@ -7,10 +7,11 @@ export default function HomePage() {
       <Image
         src={bg}
         fill
+        sizes="100vw"
         placeholder="blur"
         quality={60}
         className="object-cover object-center"
-        alt="Mountains and forests with two cabins"
+        alt="Домик в лесу"
       />
 
       <div className="relative z-10 text-center">

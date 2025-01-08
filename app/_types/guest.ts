@@ -1,4 +1,4 @@
-export type Guest = {
+export type GuestType = {
   id?: number;
   created_at?: Date | string;
   fullName?: string | null;
