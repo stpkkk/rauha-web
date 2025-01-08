@@ -1,10 +1,15 @@
 import UpdateProfileForm from "@/app/_components/UpdateProfileForm";
+import { auth } from "@/app/_lib/auth";
+import { getGuest } from "@/app/_lib/data-service";
 
 export const metadata = {
   title: "Обновить Профиль",
 };
 
-function ProfilePage() {
+export default async function ProfilePage() {
+  const session = await auth();
+  const guest = await getGuest(session?.user.email);
+
   return (
     <div>
       <h2 className="mb-4 text-2xl font-semibold text-accent-400">
@@ -16,9 +21,8 @@ function ProfilePage() {
         быстрым и беспроблемным. До скорой встречи!
       </p>
 
-      <UpdateProfileForm />
+      <UpdateProfileForm guest={guest} />
     </div>
   );
 }
 
-export default ProfilePage;
