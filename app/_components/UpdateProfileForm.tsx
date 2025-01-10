@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormStatus } from "react-dom";
 import { updateGuest } from "../_lib/actions";
 import { GuestType } from "../_types/guest";
 
@@ -54,10 +55,22 @@ export default function UpdateProfileForm({ guest }: UpdateProfileFormProps) {
       </div>
 
       <div className="flex items-center justify-end gap-6">
-        <button className="bg-accent-500 px-8 py-4 font-semibold text-primary-800 transition-all hover:bg-accent-600 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-          Обновить профиль
-        </button>
+        <Button />
       </div>
     </form>
   );
 }
+
+export function Button() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      className="bg-accent-500 px-8 py-4 font-semibold text-primary-800 transition-all hover:bg-accent-600 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
+      disabled={pending}
+    >
+      {pending ? "Обновляется..." : "Обновить профиль"}
+    </button>
+  );
+}
+

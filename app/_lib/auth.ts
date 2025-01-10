@@ -38,7 +38,7 @@ const authConfig = {
     },
 
     async session({ session, user }: SessionArguments) {
-      //setting guestId to session for using this id in other part of app(reservations, guest form and other)
+      //set guestId to session for using this id in other part of app(reservations, guest form and other)
       const guest = await getGuest(session.user.email);
 
       session.user.guestId = guest.id;
