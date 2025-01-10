@@ -3,6 +3,21 @@
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import supabase from "./supabase";
+// import { getBookedDatesByCabinId, getCabin } from "./data-service";
+
+// export async function createBooking(formData: FormData) {
+//   const session = await auth();
+//   const cabin = await getCabin()
+//   const bookedDates = await getBookedDatesByCabinId(cabin.id);
+//   const numGuests = formData.get("numGuests") as string;
+//   const observations = formData.get("observations") as string;
+
+//   const newBooking = {
+//     guestId: session?.user.guestId,
+//     numGuests, 
+//     observations
+//   };
+// }
 
 export async function updateGuest(formData: FormData) {
   const session = await auth();

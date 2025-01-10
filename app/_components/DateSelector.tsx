@@ -1,12 +1,12 @@
 "use client";
 
 // import { isWithinInterval } from "date-fns";
-import { DayPicker, DateRange } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { CabinType } from "../_types/cabin";
 import { SettingType } from "../_types/setting";
 import { useReservation } from "./ReservationContext";
-import { Locale, ru } from "date-fns/locale";
+import { ru } from "date-fns/locale";
 import { Day, Month } from "date-fns";
 
 // function isAlreadyBooked(range: DateRange | undefined, datesArr: Date[]) {
@@ -25,30 +25,17 @@ type DateSelector = {
   cabin: CabinType;
 };
 
-function DateSelector({
-  settings,
-  bookedDays = [new Date()],
-  cabin = {
-    id: "",
-    name: "",
-    maxCapacity: 0,
-    regularPrice: 0,
-    discount: 0,
-    image: "",
-    description: "",
-  },
-}: DateSelector) {
+function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
   const { range, setRange, resetRange } = useReservation();
+  const { regularPrice, discount } = cabin;
 
-  const regularPrice = 23;
-  const discount = 23;
   const numNights =
     range?.from && range?.to
       ? Math.round(
           (range.to.getTime() - range.from.getTime()) / (1000 * 60 * 60 * 24),
         )
       : 0;
-  const cabinPrice = numNights * (regularPrice - discount);
+  const totalPrice = numNights * (regularPrice - discount);
 
   // SETTINGS
   const { minBookingLength, maxBookingLength } = settings;
@@ -125,8 +112,8 @@ function DateSelector({
                 <span>&times;</span> <span>{numNights}</span>
               </p>
               <p>
-                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="text-lg font-bold uppercase">Итого</span>{" "}
+                <span className="text-2xl font-semibold">${totalPrice}</span>
               </p>
             </>
           ) : null}

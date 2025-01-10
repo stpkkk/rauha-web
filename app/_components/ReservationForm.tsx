@@ -40,9 +40,7 @@ function ReservationForm({ cabin, user }: ReservationFormType) {
             className="w-full rounded-sm bg-primary-200 px-5 py-3 text-primary-800 shadow-sm"
             required
           >
-            <option value="" key="">
-              Количество гостей...
-            </option>
+            <option>Количество гостей...</option>
             {Array.from({ length: maxCapacity }, (_, i) => i + 1).map((x) => (
               <option value={x} key={x}>
                 {x} {x === 1 ? "гость" : "гостей"}

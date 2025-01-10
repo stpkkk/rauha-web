@@ -3,6 +3,7 @@ import { CabinType } from "./cabin";
 export type BookingType =
   | {
       id: number;
+      created_at: Date | string;
       guestId: number;
       startDate: Date | string;
       endDate: Date | string;
@@ -10,7 +11,7 @@ export type BookingType =
       totalPrice: number;
       numGuests: number;
       status: string;
-      created_at: Date | string;
       cabins: Partial<CabinType>;
+      observations?: string;
     }
   | [];
