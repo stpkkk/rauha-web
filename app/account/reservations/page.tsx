@@ -11,8 +11,6 @@ async function ReservationsPage() {
   const session = await auth();
   const bookings = await getBookings(session?.user.guestId || null);
 
-  console.log("bookings:", bookings);
-
   return (
     <div>
       <h2 className="mb-7 text-2xl font-semibold text-accent-400">

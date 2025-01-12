@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import supabase from "./supabase";
+import { getBookings } from "./data-service";
 // import { getBookedDatesByCabinId, getCabin } from "./data-service";
 
 // export async function createBooking(formData: FormData) {
@@ -14,15 +15,36 @@ import supabase from "./supabase";
 
 //   const newBooking = {
 //     guestId: session?.user.guestId,
-//     numGuests, 
+//     numGuests,
 //     observations
 //   };
 // }
 
+export async function deleteReservation(bookingId: number) {
+  const session = await auth();
+
+  if (!session) throw new Error("Вы должны войти!");
+
+  //to restrict the user only can delete their own reservations
+  const bookings = await getBookings(session.user.guestId);
+  if (!bookings.some((el) => el.id === +bookingId))
+    throw new Error("У вас нет прав удалить это бронирование");
+
+  const { data, error } = await supabase
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId)
+    .eq("guestId", session.user.guestId);
+
+  if (error) throw new Error("Невозможно удалить бронирование");
+
+  revalidatePath("/account/reservations");
+}
+
 export async function updateGuest(formData: FormData) {
   const session = await auth();
 
-  if (!session) throw new Error("You must be logged in");
+  if (!session) throw new Error("Вы должны войти!");
 
   const passportId = formData.get("passportId") as string;
   const homeTown = formData.get("homeTown") as string;
@@ -39,10 +61,7 @@ export async function updateGuest(formData: FormData) {
     .select()
     .single();
 
-  if (error) {
-    console.error(error);
-    throw new Error("Пользователь не может быть обновлен");
-  }
+  if (error) throw new Error("Пользователь не может быть обновлен");
 
   revalidatePath("/account");
 }

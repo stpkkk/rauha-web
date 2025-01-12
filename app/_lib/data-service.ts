@@ -4,8 +4,6 @@ import { BookingType } from "../_types/booking";
 import { notFound } from "next/navigation";
 import { GuestType } from "../_types/guest";
 
-// GET
-
 export async function getCabin(id: number) {
   const { data, error } = await supabase
     .from("cabins")
@@ -140,20 +138,6 @@ export async function getSettings() {
   return data;
 }
 
-// export async function getCountries() {
-//   try {
-//     const res = await fetch(
-//       "https://restcountries.com/v2/all?fields=name,flag",
-//     );
-//     const countries = await res.json();
-//     return countries;
-//   } catch {
-//     throw new Error("Could not fetch countries");
-//   }
-// }
-
-// CREATE
-
 export async function createGuest(newGuest: GuestType) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
@@ -181,27 +165,7 @@ export async function createBooking(newBooking: BookingType) {
   return data;
 }
 
-
 /*
-/////////////
-// UPDATE
-
-// The updatedFields is an object which should ONLY contain the updated data
-export async function updateGuest(id: number, updatedFields: any) {
-  const { data, error } = await supabase
-    .from("guests")
-    .update(updatedFields)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Guest could not be updated");
-  }
-  return data;
-}
-
 export async function updateBooking(id: number, updatedFields: any) {
   const { data, error } = await supabase
     .from("bookings")
@@ -217,16 +181,4 @@ export async function updateBooking(id: number, updatedFields: any) {
   return data;
 }
 
-/////////////
-// DELETE
-
-export async function deleteBooking(id: number) {
-  const { data, error } = await supabase.from("bookings").delete().eq("id", id);
-
-  if (error) {
-    console.error(error);
-    throw new Error("Booking could not be deleted");
-  }
-  return data;
-}
 */
