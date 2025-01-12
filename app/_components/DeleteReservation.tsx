@@ -1,20 +1,37 @@
 "use client";
 
 import { TrashIcon } from "@heroicons/react/24/solid";
+import { useTransition } from "react";
 import { deleteReservation } from "../_lib/actions";
+import SpinnerMini from "./SpinnerMini";
 
 type DeleteReservationProps = {
   bookingId: number;
 };
 
 function DeleteReservation({ bookingId }: DeleteReservationProps) {
+  const [isPending, startTransition] = useTransition();
+
+  function handleDelete() {
+    if (confirm("Вы уверены, что хотите удалить это бронирование?"))
+      startTransition(() => deleteReservation(bookingId));
+  }
+
   return (
     <button
-      onClick={() => deleteReservation(bookingId)}
+      onClick={handleDelete}
       className="group flex flex-grow items-center gap-2 px-3 text-xs font-bold uppercase text-primary-300 transition-colors hover:bg-accent-600 hover:text-primary-900"
     >
-      <TrashIcon className="h-5 w-5 text-primary-600 transition-colors group-hover:text-primary-800" />
-      <span className="mt-1">Удалить</span>
+      {isPending ? (
+        <span className="mx-auto">
+          <SpinnerMini />
+        </span>
+      ) : (
+        <>
+          <TrashIcon className="h-5 w-5 text-primary-600 transition-colors group-hover:text-primary-800" />
+          <span className="mt-1">Удалить</span>
+        </>
+      )}
     </button>
   );
 }
