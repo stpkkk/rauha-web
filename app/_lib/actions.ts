@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import supabase from "./supabase";
 import { getBookings } from "./data-service";
+import { redirect } from "next/navigation";
 // import { getBookedDatesByCabinId, getCabin } from "./data-service";
 
 // export async function createBooking(formData: FormData) {
@@ -19,6 +20,42 @@ import { getBookings } from "./data-service";
 //     observations
 //   };
 // }
+
+export async function updateReservation(formData: FormData) {
+  const bookingId = Number(formData.get("bookingId"));
+
+  //1 Authentication
+  const session = await auth();
+  if (!session) throw new Error("Вы должны войти для обновления бронирования!");
+
+  //2 Authorization to restrict the user only can delete their own reservations
+  const guestBookings = await getBookings(session.user.guestId);
+  if (!guestBookings.some((el) => el.id === bookingId))
+    throw new Error("У вас нет прав обновлять это бронирование");
+
+  //3 Building update data
+  const numGuests = formData.get("numGuests") as string;
+  const observations = formData.get("observations")?.slice(0, 1000) as string;
+  const updatedFields = { numGuests: +numGuests, observations };
+
+  //4 Mutation
+  const { data, error } = await supabase
+    .from("bookings")
+    .update(updatedFields)
+    .eq("id", bookingId)
+    .select()
+    .single();
+
+  //5 Error Handling
+  if (error) {
+    console.error(error);
+    throw new Error("Ошибка в обновлении бронирования");
+  }
+
+  //6 Revalidate and Redirect
+  revalidatePath("/account/reservations", "layout");
+  redirect("/account/reservations");
+}
 
 export async function deleteReservation(bookingId: number) {
   const session = await auth();

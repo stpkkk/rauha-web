@@ -14,4 +14,5 @@ export type BookingType = {
     | Pick<CabinType, "name" | "image">
     | Array<Pick<CabinType, "name" | "image">>;
   observations?: string;
+  cabinId: number;
 };
