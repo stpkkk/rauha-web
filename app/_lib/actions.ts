@@ -1,27 +1,53 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { auth, signIn, signOut } from "./auth";
-import supabase from "./supabase";
-import { getBookings } from "./data-service";
 import { redirect } from "next/navigation";
-// import { getBookedDatesByCabinId, getCabin } from "./data-service";
+import supabase from "./supabase";
+import { auth, signIn, signOut } from "./auth";
+import { getBookings } from "./data-service";
 
-// export async function createBooking(formData: FormData) {
-//   const session = await auth();
-//   const cabin = await getCabin()
-//   const bookedDates = await getBookedDatesByCabinId(cabin.id);
-//   const numGuests = formData.get("numGuests") as string;
-//   const observations = formData.get("observations") as string;
+type BookingData = {
+  startDate: Date | string;
+  endDate: Date | string;
+  cabinPrice: number;
+  numNights: number;
+  cabinId: string;
+};
 
-//   const newBooking = {
-//     guestId: session?.user.guestId,
-//     numGuests,
-//     observations
-//   };
-// }
+export async function createBooking(
+  bookingData: BookingData,
+  formData: FormData,
+) {
+  const session = await auth();
+  if (!session) throw new Error("Вы должны войти для обновления бронирования!");
 
-export async function updateReservation(formData: FormData) {
+  const numGuests = Number(formData.get("numGuests"));
+  const observations = formData.get("observations")?.slice(0, 1000);
+
+  const newBooking = {
+    ...bookingData,
+    guestId: session?.user.guestId,
+    numGuests,
+    observations,
+    extrasPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    isPaid: false,
+    hasBreakfast: false,
+    status: "unconfirmed",
+  };
+
+  const { data, error } = await supabase.from("bookings").insert([newBooking]);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Бронирование не может быть создано 😥");
+  }
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
+  redirect("/cabins/thankyou");
+}
+
+export async function updateBooking(formData: FormData) {
   const bookingId = Number(formData.get("bookingId"));
 
   //1 Authentication
@@ -57,7 +83,7 @@ export async function updateReservation(formData: FormData) {
   redirect("/account/reservations");
 }
 
-export async function deleteReservation(bookingId: number) {
+export async function deleteBooking(bookingId: number) {
   const session = await auth();
 
   if (!session) throw new Error("Вы должны войти!");

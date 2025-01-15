@@ -53,7 +53,7 @@ export default function UpdateProfileForm({ guest }: UpdateProfileFormProps) {
       </div>
 
       <div className="flex items-center justify-end gap-6">
-        <SubmitButton text="профиль" />
+        <SubmitButton text="Обновить" pendingText="Обновляем..." />
       </div>
     </form>
   );

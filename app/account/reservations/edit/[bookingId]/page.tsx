@@ -1,4 +1,4 @@
-import { updateReservation } from "@/app/_lib/actions";
+import { updateBooking } from "@/app/_lib/actions";
 import { getBooking, getCabin } from "@/app/_lib/data-service";
 import { SubmitButton } from "@/app/_components/SubmitButton";
 import { BookingType } from "@/app/_types/booking";
@@ -20,7 +20,7 @@ export default async function EditPage({ params }: EditPageProps) {
       </h2>
 
       <form
-        action={updateReservation}
+        action={updateBooking}
         className="flex flex-col gap-6 bg-primary-900 px-12 py-8 text-lg"
       >
         <input type="hidden" name="bookingId" value={params.bookingId} />
@@ -56,7 +56,7 @@ export default async function EditPage({ params }: EditPageProps) {
         </div>
 
         <div className="flex items-center justify-end gap-6">
-          <SubmitButton text="бронирование" />
+          <SubmitButton text="Обновить" pendingText="Обновляем..." />
         </div>
       </form>
     </div>

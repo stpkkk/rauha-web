@@ -2,7 +2,7 @@
 
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useTransition } from "react";
-import { deleteReservation } from "../_lib/actions";
+import { deleteBooking } from "../_lib/actions";
 import SpinnerMini from "./SpinnerMini";
 
 type DeleteReservationProps = {
@@ -14,7 +14,7 @@ function DeleteReservation({ bookingId }: DeleteReservationProps) {
 
   function handleDelete() {
     if (confirm("Вы уверены, что хотите удалить это бронирование?"))
-      startTransition(() => deleteReservation(bookingId));
+      startTransition(() => deleteBooking(bookingId));
   }
 
   return (
