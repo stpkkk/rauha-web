@@ -54,15 +54,15 @@ export async function updateBooking(formData: FormData) {
   const session = await auth();
   if (!session) throw new Error("Вы должны войти для обновления бронирования!");
 
-  //2 Authorization to restrict the user only can delete their own reservations
+  //2 Authorization, to restrict the user only can delete their own reservations
   const guestBookings = await getBookings(session.user.guestId);
   if (!guestBookings.some((el) => el.id === bookingId))
     throw new Error("У вас нет прав обновлять это бронирование");
 
   //3 Building update data
-  const numGuests = formData.get("numGuests") as string;
-  const observations = formData.get("observations")?.slice(0, 1000) as string;
-  const updatedFields = { numGuests: +numGuests, observations };
+  const numGuests = Number(formData.get("numGuests"));
+  const observations = formData.get("observations")?.slice(0, 1000);
+  const updatedFields = { numGuests, observations };
 
   //4 Mutation
   const { data, error } = await supabase

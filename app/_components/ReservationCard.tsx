@@ -8,6 +8,7 @@ import Link from "next/link";
 
 type ReservationCardProps = {
   booking: BookingType;
+  onDelete: (bookingId: number) => void;
 };
 
 export const formatDistanceFromNow = (date: string | Date) =>
@@ -16,7 +17,10 @@ export const formatDistanceFromNow = (date: string | Date) =>
     locale: ru,
   }).replace("около ", "");
 
-export default function ReservationCard({ booking }: ReservationCardProps) {
+export default function ReservationCard({
+  booking,
+  onDelete,
+}: ReservationCardProps) {
   const {
     id,
     startDate,
@@ -98,7 +102,7 @@ export default function ReservationCard({ booking }: ReservationCardProps) {
               <PencilSquareIcon className="h-5 w-5 text-primary-600 transition-colors group-hover:text-primary-800" />
               <span className="mt-1">Редактировать</span>
             </Link>
-            <DeleteReservation bookingId={id} />
+            <DeleteReservation bookingId={id} onDelete={onDelete} />
           </>
         ) : null}
       </div>
