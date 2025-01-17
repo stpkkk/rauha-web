@@ -1,12 +1,13 @@
 "use client";
 
-import { User } from "next-auth";
 import Image from "next/image";
-import { useReservation } from "./ReservationContext";
-import { CabinType } from "../_types/cabin";
-import { createBooking } from "../_lib/actions";
 import { differenceInDays } from "date-fns";
+import { User } from "next-auth";
+import { useReservation } from "./ReservationContext";
 import { SubmitButton } from "./SubmitButton";
+import { setLocalHoursToUTCOffset } from "../_helpers/setLocalHoursToUTCOffset";
+import { createBooking } from "../_lib/actions";
+import { CabinType } from "../_types/cabin";
 
 type ReservationFormType = {
   cabin: CabinType;
@@ -14,8 +15,8 @@ type ReservationFormType = {
 };
 
 type BookingData = {
-  startDate: Date | string;
-  endDate: Date | string;
+  startDate?: Date | null;
+  endDate?: Date | null;
   cabinPrice: number;
   numNights: number;
   cabinId: string;
@@ -23,8 +24,8 @@ type BookingData = {
 
 function ReservationForm({ cabin, user }: ReservationFormType) {
   const { range, resetRange } = useReservation();
-  const startDate = range?.from || "";
-  const endDate = range?.to || "";
+  const startDate = setLocalHoursToUTCOffset(range?.from);
+  const endDate = setLocalHoursToUTCOffset(range?.to);
   const { id, maxCapacity, regularPrice, discount } = cabin;
   const numNights =
     range?.from && range?.to ? differenceInDays(range?.to, range?.from) : 0;

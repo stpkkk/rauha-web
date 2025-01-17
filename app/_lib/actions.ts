@@ -7,8 +7,8 @@ import { auth, signIn, signOut } from "./auth";
 import { getBookings } from "./data-service";
 
 type BookingData = {
-  startDate: Date | string;
-  endDate: Date | string;
+  startDate?: Date | null;
+  endDate?: Date | null;
   cabinPrice: number;
   numNights: number;
   cabinId: string;
