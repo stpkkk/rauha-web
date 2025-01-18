@@ -2,10 +2,6 @@
 
 // import { isWithinInterval } from "date-fns";
 import { DateRange, DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { CabinType } from "../_types/cabin";
-import { SettingType } from "../_types/setting";
-import { useReservation } from "./ReservationContext";
 import { ru } from "date-fns/locale";
 import {
   Day,
@@ -15,6 +11,10 @@ import {
   isWithinInterval,
   Month,
 } from "date-fns";
+import "react-day-picker/dist/style.css";
+import { CabinType } from "../_types/cabin";
+import { SettingType } from "../_types/setting";
+import { useReservation } from "./ReservationContext";
 
 function isAlreadyBooked(
   range: DateRange | undefined,
@@ -64,7 +64,7 @@ function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
-        className="place-self-center pt-12"
+        className="place-self-center pt-12 sm:py-6"
         mode="range"
         onSelect={setRange}
         selected={displayRange}
@@ -81,50 +81,29 @@ function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
           isPast(curDate) || bookedDays.some((date) => isSameDay(date, curDate))
         }
       />
-      {/*
-       react-day-picker v9+:
-      <DayPicker
-        className="place-self-center pt-12"
-        mode="range"
-        min={minBookingLength + 1}
-        max={maxBookingLength}
-        onSelect={handleSelect} // Write the state if selected a date
-        selected={range} // Read the state
-        // // OLD API
-        // fromMonth={new Date()}
-        // fromDate={new Date()}
-        // toYear={new Date().getFullYear() + 5}
-        // BASED ON NEW API
-        startMonth={new Date()}
-        startDate={new Date()}
-        endMonth={new Date(new Date().getFullYear() + 5, 11)} // December of the year 5 years from now
-        captionLayout="dropdown"
-        numberOfMonths={2} // Show only 2 months
-      /> */}
-
       <div className="flex h-[72px] items-center justify-between bg-accent-500 px-8 text-primary-800">
         <div className="flex items-baseline gap-6">
           <p className="flex items-baseline gap-2">
             {discount > 0 ? (
               <>
-                <span className="text-2xl">{regularPrice - discount}руб.</span>
+                <span className="">{regularPrice - discount}руб.</span>
                 <span className="font-semibold text-primary-700 line-through">
                   {regularPrice}руб.
                 </span>
               </>
             ) : (
-              <span className="text-2xl">{regularPrice}руб.</span>
+              <span>{regularPrice}руб.</span>
             )}
-            <span className="">/ночь</span>
+            <span>/ночь</span>
           </p>
           {numNights > 0 ? (
             <>
-              <p className="bg-accent-600 px-3 py-2 text-2xl">
+              <p className="bg-accent-600 px-3 py-2">
                 <span>&times;</span> <span>{numNights}</span>
               </p>
               <p>
-                <span className="text-lg font-bold uppercase">Итого</span>{" "}
-                <span className="text-2xl font-semibold">${totalPrice}</span>
+                <span className="text-lg font-bold uppercase">Итого:</span>{" "}
+                <span className="font-semibold">{totalPrice}руб.</span>
               </p>
             </>
           ) : null}

@@ -1,8 +1,8 @@
+import { Suspense } from "react";
+import { getCabin, getCabins } from "@/app/_lib/data-service";
 import Cabin from "@/app/_components/Cabin";
 import Reservation from "@/app/_components/Reservation";
 import Spinner from "@/app/_components/Spinner";
-import { getCabin, getCabins } from "@/app/_lib/data-service";
-import { Suspense } from "react";
 
 type CabinPageProps = {
   params: { cabinId: number };
@@ -37,8 +37,8 @@ export default async function CabinPage({ params }: CabinPageProps) {
     <div className="mx-auto mt-8 max-w-6xl">
       <Cabin cabin={cabin} />
       <div>
-        <h2 className="mb-10 text-center text-5xl font-semibold text-accent-400">
-          Забронируйте домик {name} сегодня. Оплатите при прибытии.
+        <h2 className="mb-10 text-center text-3xl font-semibold text-accent-400 lg:text-5xl">
+          Забронируйте уютный домик {name} уже сегодня! Оплата при заезде.
         </h2>
 
         <Suspense fallback={<Spinner />}>

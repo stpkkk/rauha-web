@@ -1,7 +1,7 @@
+import Link from "next/link";
 import ReservationList from "@/app/_components/ReservationList";
 import { auth } from "@/app/_lib/auth";
 import { getBookings } from "@/app/_lib/data-service";
-import Link from "next/link";
 
 export const metadata = {
   title: "Бронирования",

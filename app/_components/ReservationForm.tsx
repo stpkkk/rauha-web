@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { differenceInDays } from "date-fns";
 import { User } from "next-auth";
+import Image from "next/image";
+import { differenceInDays } from "date-fns";
+import { CabinType } from "../_types/cabin";
+import { createBooking } from "../_lib/actions";
 import { useReservation } from "./ReservationContext";
 import { SubmitButton } from "./SubmitButton";
-import { setLocalHoursToUTCOffset } from "../_helpers/setLocalHoursToUTCOffset";
-import { createBooking } from "../_lib/actions";
-import { CabinType } from "../_types/cabin";
 
 type ReservationFormType = {
   cabin: CabinType;
@@ -65,7 +66,7 @@ function ReservationForm({ cabin, user }: ReservationFormType) {
           await createBookingWithData(formData);
           resetRange();
         }}
-        className="flex flex-col gap-5 bg-primary-900 px-16 py-10 text-lg"
+        className="flex flex-col gap-5 bg-primary-900 px-16 py-10"
       >
         <div className="space-y-2">
           <label htmlFor="numGuests">Сколько будет гостей?</label>
