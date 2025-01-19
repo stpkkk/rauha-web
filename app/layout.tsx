@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="relative flex min-h-screen flex-col bg-primary-950 font-comfortaa text-primary-100 antialiased">
         <Header />
-        <div className="grid flex-1 px-8 py-12">
+        <div className="grid flex-1 px-4 py-12 md:px-8">
           <main className="mx-auto w-full max-w-7xl">
             <ReservationProvider>{children}</ReservationProvider>
           </main>

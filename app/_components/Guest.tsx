@@ -8,7 +8,7 @@ export default async function Guest() {
   return (
     <Link
       href="/account"
-      className="flex items-center gap-4 transition-colors hover:text-accent-400"
+      className="flex items-center gap-2 transition-colors hover:text-accent-400 lg:gap-4"
     >
       {session?.user?.image ? (
         <div className="relative h-8 w-8">

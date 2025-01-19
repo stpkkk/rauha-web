@@ -3,8 +3,8 @@ import Guest from "./Guest";
 
 export default function Navigation() {
   return (
-    <nav className="z-10 text-xl">
-      <ul className="flex items-center gap-16">
+    <nav className="text-md z-10 md:text-xl">
+      <ul className="flex items-center gap-4 lg:gap-16">
         <li>
           <Link
             href="/cabins"
