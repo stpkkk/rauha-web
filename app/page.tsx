@@ -15,7 +15,7 @@ export default function HomePage() {
       />
 
       <div className="relative z-10 text-center">
-        <h1 className="mb-12 text-8xl font-normal tracking-tight text-primary-50 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+        <h1 className="mb-12 text-6xl font-normal tracking-tight text-primary-50 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-8xl">
           Уютные домики в сердце <span className="font-bold">Карелии</span>, на
           берегу озера!
         </h1>

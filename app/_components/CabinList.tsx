@@ -1,5 +1,4 @@
 // import { unstable_noStore as noStore } from "next/cache";
-
 import { getCabins } from "../_lib/data-service";
 import { CabinType } from "../_types/cabin";
 import CabinCard from "./CabinCard";
@@ -25,7 +24,7 @@ async function CabinList({ filter }: CabinListProps) {
 
   return (
     <>
-      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:gap-12 xl:gap-14">
+      <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2 lg:gap-12 xl:gap-14">
         {displayedCabins?.map((cabin) => (
           <CabinCard cabin={cabin} key={cabin.id} />
         ))}

@@ -22,10 +22,10 @@ export default function CabinsPage({ searchParams }: CabinsPageProps) {
 
   return (
     <div>
-      <h1 className="mb-5 text-4xl font-medium text-accent-400">
+      <h1 className="mb-2 text-2xl font-medium text-accent-400 md:mb-5 md:text-4xl">
         Про наши домики
       </h1>
-      <p className="mb-10 text-lg text-primary-200">
+      <p className="ms:text-lg mb-6 text-primary-200 md:mb-10">
         Уютные, но роскошные коттеджи, расположенные в самом сердце Карелии.
         Представьте себе, что вы просыпаетесь и наслаждаетесь прекрасным видом
         на озеро, проводите дни, исследуя леса вокруг, или просто расслабляетесь
@@ -34,7 +34,7 @@ export default function CabinsPage({ searchParams }: CabinsPageProps) {
         пожаловать!
       </p>
 
-      <div className="mb-8 flex justify-end">
+      <div className="mb-6 flex justify-end md:mb-8">
         <Filter />
       </div>
       {/* key={filter} - unique key (than filter value changes then spinner shown again)*/}
