@@ -64,7 +64,7 @@ function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
-        className="place-self-center pt-12 sm:py-6"
+        className="place-self-center py-12 sm:py-6"
         mode="range"
         onSelect={setRange}
         selected={displayRange}
@@ -81,12 +81,24 @@ function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
           isPast(curDate) || bookedDays.some((date) => isSameDay(date, curDate))
         }
       />
-      <div className="flex h-[72px] items-center justify-between bg-accent-500 px-8 text-primary-800">
-        <div className="flex items-baseline gap-6">
+
+      <div className="mb-10 flex h-[60px] items-center justify-center self-center">
+        {(range?.from || range?.to) && (
+          <button
+            className="border border-primary-800 bg-accent-500 px-8 py-4 text-sm font-semibold text-primary-800 transition-all hover:bg-accent-600 disabled:cursor-not-allowed"
+            onClick={resetRange}
+          >
+            Сбросить
+          </button>
+        )}
+      </div>
+
+      <div className="flex h-[72px] items-center justify-between bg-accent-500 px-4 text-primary-800">
+        <div className="flex w-full items-baseline justify-between gap-4">
           <p className="flex items-baseline gap-2">
             {discount > 0 ? (
               <>
-                <span className="">{regularPrice - discount}руб.</span>
+                <span>{regularPrice - discount}руб.</span>
                 <span className="font-semibold text-primary-700 line-through">
                   {regularPrice}руб.
                 </span>
@@ -95,28 +107,20 @@ function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
               <span>{regularPrice}руб.</span>
             )}
             <span>/ночь</span>
-          </p>
-          {numNights > 0 ? (
-            <>
+            {numNights > 0 ? (
               <p className="bg-accent-600 px-3 py-2">
                 <span>&times;</span> <span>{numNights}</span>
               </p>
-              <p>
-                <span className="text-lg font-bold uppercase">Итого:</span>{" "}
-                <span className="font-semibold">{totalPrice}руб.</span>
-              </p>
-            </>
+            ) : null}
+          </p>
+
+          {numNights > 0 ? (
+            <p>
+              <span className="text-lg font-bold uppercase">Итого:</span>{" "}
+              <span className="font-semibold">{totalPrice}руб.</span>
+            </p>
           ) : null}
         </div>
-
-        {range?.from || range?.to ? (
-          <button
-            className="border border-primary-800 px-4 py-2 text-sm font-semibold"
-            onClick={resetRange}
-          >
-            Сбросить
-          </button>
-        ) : null}
       </div>
     </div>
   );

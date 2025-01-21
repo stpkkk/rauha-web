@@ -43,7 +43,7 @@ function ReservationForm({ cabin, user }: ReservationFormType) {
   const createBookingWithData = createBooking.bind(null, bookingData);
 
   return (
-    <div className="scale-[1.01]">
+    <div className="scale-[1.01] bg-primary-900">
       <div className="flex items-center justify-between bg-primary-800 px-16 py-2 text-primary-300">
         <div className="relative h-8 w-8">
           <Image
@@ -65,7 +65,7 @@ function ReservationForm({ cabin, user }: ReservationFormType) {
           await createBookingWithData(formData);
           resetRange();
         }}
-        className="flex flex-col gap-5 bg-primary-900 px-16 py-10"
+        className="flex flex-col gap-5 px-16 py-10"
       >
         <div className="space-y-2">
           <label htmlFor="numGuests">Сколько будет гостей?</label>

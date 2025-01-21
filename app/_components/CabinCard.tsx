@@ -22,8 +22,8 @@ function CabinCard({ cabin }: CabinCardProps) {
         />
       </div>
 
-      <div className="flex w-full flex-col justify-between sm:w-3/5">
-        <div className="bg-primary-900 px-4 py-4 sm:px-7 sm:py-5">
+      <div className="flex w-full flex-col justify-between bg-primary-900 sm:w-3/5">
+        <div className="px-4 py-4 sm:px-7 sm:py-5">
           <h3 className="mb-3 text-xl font-semibold text-accent-500 sm:text-2xl">
             Домик {name}
           </h3>
@@ -38,7 +38,7 @@ function CabinCard({ cabin }: CabinCardProps) {
           <p className="flex items-baseline justify-end gap-2 sm:gap-3">
             {discount > 0 ? (
               <>
-                <span className="text-2xl font-[350] sm:text-3xl">
+                <span className="text-xl font-[350] sm:text-xl">
                   {regularPrice - discount}руб.
                 </span>
                 <span className="text-sm font-semibold text-primary-600 line-through sm:text-base">
@@ -46,7 +46,7 @@ function CabinCard({ cabin }: CabinCardProps) {
                 </span>
               </>
             ) : (
-              <span className="text-2xl font-[350] sm:text-3xl">
+              <span className="text-2xl font-[350] sm:text-xl">
                 {regularPrice}руб.
               </span>
             )}
