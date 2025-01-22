@@ -8,6 +8,7 @@ import { CabinType } from "../_types/cabin";
 import { createBooking } from "../_lib/actions";
 import { useReservation } from "./ReservationContext";
 import { SubmitButton } from "./SubmitButton";
+import { Tooltip } from "./Tooltip";
 
 type ReservationFormType = {
   cabin: CabinType;
@@ -20,10 +21,11 @@ type BookingData = {
   cabinPrice: number;
   numNights: number;
   cabinId: string;
+  hasBreakfast: boolean;
 };
 
 function ReservationForm({ cabin, user }: ReservationFormType) {
-  const { range, resetRange } = useReservation();
+  const { range, resetRange, setHasBreakfast, hasBreakfast } = useReservation();
   const startDate = setLocalHoursToUTCOffset(range?.from);
   const endDate = setLocalHoursToUTCOffset(range?.to);
   const { id, maxCapacity, regularPrice, discount } = cabin;
@@ -37,6 +39,7 @@ function ReservationForm({ cabin, user }: ReservationFormType) {
     cabinPrice,
     numNights,
     cabinId: id,
+    hasBreakfast,
   };
 
   //Pass bookingData from client to server action
@@ -82,6 +85,18 @@ function ReservationForm({ cabin, user }: ReservationFormType) {
               </option>
             ))}
           </select>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <input
+            className="h-5 w-5"
+            type="checkbox"
+            name="hasBreakfast"
+            id="hasBreakfast"
+            onChange={(e) => setHasBreakfast(e.target.checked)}
+          />
+          <label htmlFor="hasBreakfast">Добавить завтрак?</label>
+          <Tooltip text="Завтрак включает в себя свежую выпечку, фрукты, яйца, кофе и чай. Подается с 7:00 до 10:00. Стоимость одного завтрака составляет 400руб." />
         </div>
 
         <div className="space-y-2">

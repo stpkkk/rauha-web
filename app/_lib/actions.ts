@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import supabase from "./supabase";
 import { auth, signIn, signOut } from "./auth";
-import { getBookings } from "./data-service";
+import { getBookings, getSettings } from "./data-service";
 
 type BookingData = {
   startDate?: Date | null;
@@ -12,6 +12,7 @@ type BookingData = {
   cabinPrice: number;
   numNights: number;
   cabinId: string;
+  hasBreakfast: boolean;
 };
 
 export async function createBooking(
@@ -20,9 +21,17 @@ export async function createBooking(
 ) {
   const session = await auth();
   if (!session) throw new Error("Вы должны войти для обновления бронирования!");
+  const breakfastPrice = await getSettings();
 
   const numGuests = Number(formData.get("numGuests"));
   const observations = formData.get("observations")?.slice(0, 1000);
+  const hasBreakfast = formData.get("hasBreakfast") === "on";
+
+  const totalPrice = hasBreakfast
+    ? bookingData.cabinPrice + breakfastPrice * bookingData.numNights
+    : bookingData.cabinPrice;
+
+  console.log("totalPrice:", totalPrice);
 
   const newBooking = {
     ...bookingData,
@@ -30,20 +39,20 @@ export async function createBooking(
     numGuests,
     observations,
     extrasPrice: 0,
-    totalPrice: bookingData.cabinPrice,
+    totalPrice,
     isPaid: false,
-    hasBreakfast: false,
     status: "unconfirmed",
+    hasBreakfast,
   };
 
-  const { data, error } = await supabase.from("bookings").insert([newBooking]);
+  // const { data, error } = await supabase.from("bookings").insert([newBooking]);
 
-  if (error) {
-    console.error(error);
-    throw new Error("Бронирование не может быть создано 😥");
-  }
+  // if (error) {
+  //   console.error(error);
+  //   throw new Error("Бронирование не может быть создано 😥");
+  // }
 
-  revalidatePath(`/cabins/${bookingData.cabinId}`);
+  // revalidatePath(`/cabins/${bookingData.cabinId}`);
   redirect("/cabins/thankyou");
 }
 

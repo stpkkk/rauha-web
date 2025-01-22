@@ -2,6 +2,7 @@
 
 // import { isWithinInterval } from "date-fns";
 import { DateRange, DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 import { ru } from "date-fns/locale";
 import {
   Day,
@@ -11,10 +12,15 @@ import {
   isWithinInterval,
   Month,
 } from "date-fns";
-import "react-day-picker/dist/style.css";
 import { CabinType } from "../_types/cabin";
 import { SettingType } from "../_types/setting";
 import { useReservation } from "./ReservationContext";
+
+type DateSelector = {
+  settings: SettingType;
+  bookedDays: Date[] | number[];
+  cabin: CabinType;
+};
 
 function isAlreadyBooked(
   range: DateRange | undefined,
@@ -29,24 +35,17 @@ function isAlreadyBooked(
   );
 }
 
-type DateSelector = {
-  settings: SettingType;
-  bookedDays: Date[] | number[];
-  cabin: CabinType;
-};
-
 function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
-  const { range, setRange, resetRange } = useReservation();
+  const { range, setRange, resetRange, hasBreakfast } = useReservation();
+  const { minBookingLength, maxBookingLength, breakfastPrice } = settings;
   const displayRange = isAlreadyBooked(range, bookedDays) ? undefined : range;
   const { regularPrice, discount } = cabin;
   const numNights =
     displayRange?.from && displayRange?.to
       ? differenceInDays(displayRange?.to, displayRange?.from)
       : 0;
-  const totalPrice = numNights * (regularPrice - discount);
-
-  // SETTINGS
-  const { minBookingLength, maxBookingLength } = settings;
+  const breakfast = hasBreakfast ? breakfastPrice * numNights : 0;
+  const totalPrice = numNights * (regularPrice - discount) + breakfast;
 
   // Custom formatters for Russian localization
   const formatCaption = (month: Date) => {
@@ -98,7 +97,7 @@ function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
           <p className="flex items-baseline gap-2">
             {discount > 0 ? (
               <>
-                <span>{regularPrice - discount}руб.</span>
+                <span>{regularPrice - discount + breakfast}руб.</span>
                 <span className="font-semibold text-primary-700 line-through">
                   {regularPrice}руб.
                 </span>
