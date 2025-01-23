@@ -16,6 +16,8 @@ type ReservationContextType = {
   resetRange: () => void;
   setHasBreakfast: Dispatch<SetStateAction<boolean>>;
   hasBreakfast: boolean;
+  numGuests: number;
+  setNumGuests: Dispatch<SetStateAction<number>>;
 };
 
 type ReservationProviderProps = {
@@ -34,6 +36,7 @@ const initialState: DateRange = {
 function ReservationProvider({ children }: ReservationProviderProps) {
   const [range, setRange] = useState<DateRange | undefined>(initialState);
   const [hasBreakfast, setHasBreakfast] = useState<boolean>(false);
+  const [numGuests, setNumGuests] = useState<number>(1);
 
   const resetRange = () => {
     setRange(initialState);
@@ -41,7 +44,15 @@ function ReservationProvider({ children }: ReservationProviderProps) {
 
   return (
     <ReservationContext.Provider
-      value={{ range, setRange, resetRange, hasBreakfast, setHasBreakfast }}
+      value={{
+        range,
+        setRange,
+        resetRange,
+        hasBreakfast,
+        setHasBreakfast,
+        numGuests,
+        setNumGuests,
+      }}
     >
       {children}
     </ReservationContext.Provider>

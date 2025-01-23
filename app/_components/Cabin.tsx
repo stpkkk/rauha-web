@@ -17,6 +17,7 @@ export default function Cabin({ cabin }: CabinProps) {
           <Image
             src={image || "/placeholder.svg"}
             fill
+            priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
             alt={`Домик ${name}`}

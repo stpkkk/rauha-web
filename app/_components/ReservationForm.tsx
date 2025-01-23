@@ -25,7 +25,14 @@ type BookingData = {
 };
 
 function ReservationForm({ cabin, user }: ReservationFormType) {
-  const { range, resetRange, setHasBreakfast, hasBreakfast } = useReservation();
+  const {
+    range,
+    resetRange,
+    setHasBreakfast,
+    hasBreakfast,
+    numGuests,
+    setNumGuests,
+  } = useReservation();
   const startDate = setLocalHoursToUTCOffset(range?.from);
   const endDate = setLocalHoursToUTCOffset(range?.to);
   const { id, maxCapacity, regularPrice, discount } = cabin;
@@ -76,6 +83,8 @@ function ReservationForm({ cabin, user }: ReservationFormType) {
             name="numGuests"
             id="numGuests"
             className="w-full rounded-sm bg-primary-200 px-5 py-3 text-primary-800 shadow-sm"
+            onChange={(e) => setNumGuests(+e.target.value)}
+            value={numGuests}
             required
           >
             <option>Количество гостей...</option>

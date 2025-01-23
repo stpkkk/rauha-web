@@ -21,17 +21,15 @@ export async function createBooking(
 ) {
   const session = await auth();
   if (!session) throw new Error("Вы должны войти для обновления бронирования!");
-  const breakfastPrice = await getSettings();
 
+  const { breakfastPrice } = await getSettings();
   const numGuests = Number(formData.get("numGuests"));
   const observations = formData.get("observations")?.slice(0, 1000);
-  const hasBreakfast = formData.get("hasBreakfast") === "on";
 
-  const totalPrice = hasBreakfast
-    ? bookingData.cabinPrice + breakfastPrice * bookingData.numNights
+  const totalPrice = bookingData.hasBreakfast
+    ? bookingData.cabinPrice +
+      breakfastPrice * bookingData.numNights * numGuests
     : bookingData.cabinPrice;
-
-  console.log("totalPrice:", totalPrice);
 
   const newBooking = {
     ...bookingData,
@@ -42,17 +40,17 @@ export async function createBooking(
     totalPrice,
     isPaid: false,
     status: "unconfirmed",
-    hasBreakfast,
+    hasBreakfast: bookingData.hasBreakfast,
   };
 
-  // const { data, error } = await supabase.from("bookings").insert([newBooking]);
+  const { data, error } = await supabase.from("bookings").insert([newBooking]);
 
-  // if (error) {
-  //   console.error(error);
-  //   throw new Error("Бронирование не может быть создано 😥");
-  // }
+  if (error) {
+    console.error(error);
+    throw new Error("Бронирование не может быть создано 😥");
+  }
 
-  // revalidatePath(`/cabins/${bookingData.cabinId}`);
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
   redirect("/cabins/thankyou");
 }
 
