@@ -9,9 +9,12 @@ import {
   SetStateAction,
 } from "react";
 import { DateRange } from "react-day-picker";
+import { setLocalHoursToUTCOffset } from "../_helpers/setLocalHoursToUTCOffset";
 
 type ReservationContextType = {
-  range: DateRange | undefined;
+  startDate?: Date | null;
+  endDate?: Date | null;
+  range?: DateRange;
   setRange: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
   resetRange: () => void;
   setHasBreakfast: Dispatch<SetStateAction<boolean>>;
@@ -38,6 +41,9 @@ function ReservationProvider({ children }: ReservationProviderProps) {
   const [hasBreakfast, setHasBreakfast] = useState<boolean>(false);
   const [numGuests, setNumGuests] = useState<number>(1);
 
+  const startDate = setLocalHoursToUTCOffset(range?.from) as Date;
+  const endDate = setLocalHoursToUTCOffset(range?.to) as Date;
+
   const resetRange = () => {
     setRange(initialState);
   };
@@ -46,6 +52,8 @@ function ReservationProvider({ children }: ReservationProviderProps) {
     <ReservationContext.Provider
       value={{
         range,
+        startDate,
+        endDate,
         setRange,
         resetRange,
         hasBreakfast,

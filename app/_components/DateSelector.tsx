@@ -36,15 +36,21 @@ function isAlreadyBooked(
 }
 
 function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
-  const { range, setRange, resetRange, hasBreakfast, numGuests } =
-    useReservation();
+  const {
+    startDate,
+    endDate,
+    range,
+    setRange,
+    resetRange,
+    hasBreakfast,
+    numGuests,
+  } = useReservation();
   const { minBookingLength, maxBookingLength, breakfastPrice } = settings;
+
   const displayRange = isAlreadyBooked(range, bookedDays) ? undefined : range;
   const { regularPrice, discount } = cabin;
   const numNights =
-    displayRange?.from && displayRange?.to
-      ? differenceInDays(displayRange.to, displayRange.from)
-      : 0;
+    startDate && endDate ? differenceInDays(endDate, startDate) : 0;
   const breakfastTotal = hasBreakfast
     ? breakfastPrice * numNights * numGuests
     : 0;
@@ -85,7 +91,7 @@ function DateSelector({ settings, bookedDays, cabin }: DateSelector) {
         }
       />
 
-      {(range?.from || range?.to) && <ResetButton resetRange={resetRange} />}
+      {(startDate || endDate) && <ResetButton resetRange={resetRange} />}
 
       <SummaryPrice
         discount={discount}

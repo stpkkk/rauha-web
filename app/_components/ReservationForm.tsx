@@ -26,18 +26,17 @@ type BookingData = {
 
 function ReservationForm({ cabin, user }: ReservationFormType) {
   const {
-    range,
+    startDate,
+    endDate,
     resetRange,
     setHasBreakfast,
     hasBreakfast,
     numGuests,
     setNumGuests,
   } = useReservation();
-  const startDate = setLocalHoursToUTCOffset(range?.from);
-  const endDate = setLocalHoursToUTCOffset(range?.to);
   const { id, maxCapacity, regularPrice, discount } = cabin;
   const numNights =
-    range?.from && range?.to ? differenceInDays(range?.to, range?.from) : 0;
+    startDate && endDate ? differenceInDays(endDate, startDate) : 0;
   const cabinPrice = numNights * (regularPrice - discount);
 
   const bookingData: BookingData = {
