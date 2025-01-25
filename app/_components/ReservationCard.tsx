@@ -30,6 +30,7 @@ export default function ReservationCard({
     numGuests,
     created_at,
     cabins,
+    hasBreakfast,
   } = booking;
 
   // Handle both array and object cases for cabins
@@ -38,7 +39,7 @@ export default function ReservationCard({
 
   return (
     <div className="flex border border-primary-800">
-      <div className="relative aspect-square h-32">
+      <div className="relative aspect-square h-auto w-36">
         <Image
           src={image}
           fill
@@ -49,7 +50,7 @@ export default function ReservationCard({
       </div>
 
       <div className="flex flex-grow flex-col px-6 py-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between py-2">
           <h3 className="text-xl font-semibold">
             {numNights}{" "}
             {numNights === 1 ? "ночь" : numNights < 5 ? "ночи" : "ночей"} в
@@ -74,6 +75,8 @@ export default function ReservationCard({
           ) &mdash;{" "}
           {format(new Date(endDate), "d MMMM yyyy 'г.'", { locale: ru })}
         </p>
+
+        {hasBreakfast && <p className="py-2">С завтраками</p>}
 
         <div className="mt-auto flex items-baseline gap-5">
           <p className="text-xl font-semibold text-accent-400">

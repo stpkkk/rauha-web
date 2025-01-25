@@ -15,4 +15,5 @@ export type BookingType = {
     | Array<Pick<CabinType, "name" | "image">>;
   observations?: string;
   cabinId: number;
+  hasBreakfast: boolean;
 };

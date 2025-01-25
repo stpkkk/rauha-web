@@ -3,7 +3,6 @@
 import { User } from "next-auth";
 import Image from "next/image";
 import { differenceInDays } from "date-fns";
-import { setLocalHoursToUTCOffset } from "../_helpers/setLocalHoursToUTCOffset";
 import { CabinType } from "../_types/cabin";
 import { createBooking } from "../_lib/actions";
 import { useReservation } from "./ReservationContext";
