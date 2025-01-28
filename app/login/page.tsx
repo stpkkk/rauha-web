@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="mt-10 flex flex-col items-center gap-10">
+    <div className="container mt-10 flex flex-col items-center gap-10">
       <h2 className="text-3xl font-semibold">
         Войти, чтобы получить доступ к разделу для гостей
       </h2>

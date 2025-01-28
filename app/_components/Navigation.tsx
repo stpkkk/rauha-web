@@ -13,14 +13,7 @@ export default function Navigation() {
             Домики
           </Link>
         </li>
-        <li>
-          <Link
-            href="/about"
-            className="transition-colors hover:text-accent-400"
-          >
-            О нас
-          </Link>
-        </li>
+
         <li>
           <Guest />
         </li>

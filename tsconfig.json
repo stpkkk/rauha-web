@@ -26,7 +26,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/about/page.js",
     "app/account/reservations/[reservationId]"
   ],
   "exclude": ["node_modules"]

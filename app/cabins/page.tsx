@@ -21,7 +21,7 @@ export default function CabinsPage({ searchParams }: CabinsPageProps) {
   const filter = searchParams?.capacity ?? "all";
 
   return (
-    <div>
+    <div className="container">
       <h1 className="mb-2 text-2xl font-medium text-accent-400 md:mb-5 md:text-4xl">
         Про наши домики
       </h1>
