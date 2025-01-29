@@ -1,3 +1,4 @@
+import Footer from "./_components/Footer";
 import Header from "./_components/Header";
 import { ReservationProvider } from "./_components/ReservationContext";
 import "./_styles/globals.css";
@@ -18,11 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col bg-primary-950 font-comfortaa text-primary-100 antialiased">
+      <body className="flex min-h-screen flex-col bg-primary-950 font-comfortaa text-primary-100 antialiased">
         <Header />
-        <main className="mx-auto w-full">
+        <main className="mx-auto h-full w-full flex-grow">
           <ReservationProvider>{children}</ReservationProvider>
         </main>
+        <Footer />
       </body>
     </html>
   );

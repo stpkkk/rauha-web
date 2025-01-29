@@ -19,7 +19,7 @@ export default async function HomePage() {
           className="object-cover"
           alt="Домик в лесу"
         />
-        <h1 className="absolute mx-auto mb-12 mt-52 max-w-7xl text-6xl font-normal tracking-tight text-primary-50 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-8xl">
+        <h1 className="absolute mx-auto mb-12 mt-52 max-w-7xl p-4 text-6xl font-normal tracking-tight text-primary-50 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-8xl">
           Уютные домики в сердце <span className="font-bold">Карелии</span>, на
           берегу озера!
         </h1>
