@@ -33,7 +33,7 @@ Welcome to <b>The Rauha</b>! This is the customer version of the <a href="https:
 
 ## Live Site
 
-Check out the live app here: [The Wild Oasis - Booking](https://rauha-web.vercel.app/)
+Check out the live app here: [The Rauha - Booking](https://rauha-web.vercel.app/)
 
 ## Admin Version
 
